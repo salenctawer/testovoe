@@ -53,7 +53,7 @@ const Header = () => {
           <Typography id="modal-modal-title" variant="h6" component="h2" onClick={handleClose}>
             Clear cache
           </Typography>
-          <Typography id="modal-modal-description" sx={{ mt: 2 }} onClick={handleClose}>
+          <Typography id="modal-modal-title" sx={{ mt: 2 }} onClick={handleClose}>
             Logging out
           </Typography>
         </Box>

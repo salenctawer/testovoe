@@ -1,4 +1,4 @@
-import { connect } from "react-redux";
+import { connect, ConnectedProps } from "react-redux";
 import Dispatch from "./Dispatch";
 import {addObject} from '../../redux/dispatchReducer'
 import { AppStateType } from "../../redux/store";
@@ -8,13 +8,13 @@ export type MapStateToPropsType ={
     elements: Array<ElementsType>
 }
 
-type MapDispatchToPropsType ={
+export type MapDispatchToPropsType ={
     addObject: (received: string, pick: string, deliver: string, vehicle: string) => void
 }
 
 let mapStateToProps = (state: AppStateType): MapStateToPropsType =>{
     return{
-        elements: state.dispatchPage.elements
+        elements: state.dispatchPage.elements,
     }
 }
 

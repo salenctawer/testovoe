@@ -9,11 +9,9 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import { useEffect, useState } from 'react';
 import { ElementsType } from '../../types/types';
+import { MapDispatchToPropsType, MapStateToPropsType } from './DispathContainer';
 
-type PropsType = {
-  elements: Array<ElementsType>
-  addObject: (received: string, pick: string, deliver: string, vehicle: string) => void
-}
+type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
 interface Column {
   id: 'received' | 'pick' | 'deliver' | 'vehicle' ;

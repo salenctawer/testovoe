@@ -13,11 +13,10 @@ let initialState = {
         {received: '2019-06-27', pick: 'Saint-P', deliver:'Perm', vehicle:'car'},
         {received: '2000-06-27', pick: 'Saint-P', deliver:'Perm', vehicle:'car'},
         {received: '2000-06-29', pick: 'Saint-P', deliver:'Perm', vehicle:'car'},
-    ] as Array<ElementsType>,
-    id: 1
+    ] as Array<ElementsType>
 }
 
-const dispatchReducer = (state=initialState, action: any) =>{
+const dispatchReducer = (state=initialState, action: ActionsTypes) =>{
         switch(action.type){
             case ADD_ELEMENT:{
                 let elements = state.elements
@@ -31,6 +30,8 @@ const dispatchReducer = (state=initialState, action: any) =>{
                 return state
         }
 }
+
+type ActionsTypes = AddObjectType
 
 export type AddObjectType ={
     type: typeof ADD_ELEMENT

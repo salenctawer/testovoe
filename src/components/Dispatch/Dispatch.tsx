@@ -13,6 +13,7 @@ import { MapDispatchToPropsType, MapStateToPropsType } from './DispathContainer'
 import RefreshIcon from '@mui/icons-material/Refresh';
 import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
+import styles from './Dispatch.module.scss'
 
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
@@ -23,6 +24,33 @@ interface Column {
   align?: 'right';
   format?: (value: number) => string;
 }
+const cities = [
+  'St. Petersburg',
+  'Moscow',
+  'Novosibirsk',
+  'Yekaterinburg',
+  'Kazan',
+  'Samara',
+  'Chelyabinks',
+  'Rostov-on-Don',
+  'Ufa',
+  'Krasnoyarsk',
+  'Perm',
+  'Volgograd',
+  'Voronezh',
+  'Saratov',
+  'Krasnodar',
+  'Tolyatti',
+  'Tyumen',
+  'Izhevsk'
+]
+const vehicles =[
+  'bus',
+  'train',
+  'car',
+  'truck',
+  'wagon'
+]
 
   const Dispatch: React.FC<PropsType> = (props) => {
 
@@ -31,11 +59,18 @@ interface Column {
 
     useEffect(() => {
       let timerOne = setInterval(() => {
-        let date = '25-02-2022'
-        let pick = 'Kiev'
-        let deliver = 'Rostov'
-        let vehicle = 'car'
-        props.addObject(date, pick, deliver, vehicle)
+        let date = new  Date()
+        let dateYear = date.getUTCFullYear()
+        let dateMonth = date.getUTCMonth()
+        let dateDay = date.getUTCDay()
+        let pickRandomIndex = Math.floor(Math.random() * cities.length);
+        let pick = cities[pickRandomIndex]
+        let deliverRandomIndex = Math.floor(Math.random() * cities.length);
+        let deliver = cities[deliverRandomIndex]
+        let carRandomIndex = Math.floor(Math.random() * vehicles.length);
+        let vehicle = vehicles[carRandomIndex]
+        let fullDate = `${dateYear}-${dateMonth}-${dateDay}`
+        props.addObject(fullDate, pick, deliver, vehicle)
       }, 2000);
     }, [props.elements]);
     useEffect(()=>{
@@ -99,10 +134,14 @@ interface Column {
 
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
-      <TableContainer sx={{ maxHeight: 440 }}>
-        <CheckCircleOutlineIcon onClick={()=>setWorkFunction(true)}/>
-        <DoDisturbIcon onClick={()=>setWorkFunction(false)}/>
+      <div className={styles.icons}>
+          <div>
+          <CheckCircleOutlineIcon onClick={()=>setWorkFunction(true)}/>
+          <DoDisturbIcon onClick={()=>setWorkFunction(false)}/>
+        </div>
         <RefreshIcon onClick={()=> setUpdateObject([...props.elements])}/>
+        </div>
+      <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>

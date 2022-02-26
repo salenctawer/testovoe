@@ -133,14 +133,15 @@ const vehicles =[
   };
 
   return (
-    <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+    <div className={styles.dispatch}>
+    <Paper sx={{ width: '1200px', overflow: 'hidden', paddingLeft:'80px', paddingRight:'80px' }}>
       <div className={styles.icons}>
           <div>
-          <CheckCircleOutlineIcon onClick={()=>setWorkFunction(true)}/>
-          <DoDisturbIcon onClick={()=>setWorkFunction(false)}/>
-        </div>
-        <RefreshIcon onClick={()=> setUpdateObject([...props.elements])}/>
-        </div>
+          <CheckCircleOutlineIcon sx={{cursor:'pointer'}} onClick={()=>setWorkFunction(true)}/>
+          <DoDisturbIcon sx={{cursor:'pointer', marginLeft:'15px'}} onClick={()=>setWorkFunction(false)}/>
+          </div>
+        <RefreshIcon sx={{cursor:'pointer'}} onClick={()=> setUpdateObject([...props.elements])}/>
+      </div>
       <TableContainer sx={{ maxHeight: 440 }}>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
@@ -188,6 +189,7 @@ const vehicles =[
         onRowsPerPageChange={handleChangeRowsPerPage}
       />
     </Paper>
+    </div>
   );
 }
 

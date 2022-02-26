@@ -1,6 +1,7 @@
 import { ElementsType } from "../types/types"
 
 const ADD_ELEMENT = 'ADD_ELEMENT'
+const TOGGLE_REFRESH = 'TOGGLE_REFRESH'
 
 let initialState = {
     elements:[

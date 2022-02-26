@@ -10,6 +10,9 @@ import TableRow from '@mui/material/TableRow';
 import { useEffect, useState } from 'react';
 import { ElementsType } from '../../types/types';
 import { MapDispatchToPropsType, MapStateToPropsType } from './DispathContainer';
+import RefreshIcon from '@mui/icons-material/Refresh';
+import DoDisturbIcon from '@mui/icons-material/DoDisturb';
+import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
@@ -23,22 +26,32 @@ interface Column {
 
   const Dispatch: React.FC<PropsType> = (props) => {
 
-    const [updateObject, setUpdateObject] = useState([])
+    const [updateObject, setUpdateObject] = useState(props.elements)
+    const [workFunction, setWorkFunction] = useState(true)
 
     useEffect(() => {
-      let timer = setInterval(() => {
+      let timerOne = setInterval(() => {
         let date = '25-02-2022'
         let pick = 'Kiev'
         let deliver = 'Rostov'
         let vehicle = 'car'
         props.addObject(date, pick, deliver, vehicle)
-        console.log('вызов прошел успешно')
       }, 2000);
-      return () => clearInterval(timer);
     }, [props.elements]);
+    useEffect(()=>{
+      let interval = setInterval(()=>{
+        if(workFunction){
+          setUpdateObject([...props.elements])
+        }
+        else{
+          console.log('Автоматическое обновление сейчас не работает')
+        }
+      }, 5000)
+      return () => clearInterval(interval)
+    }, [props.elements, workFunction])
 
     for(let i=0;i<=2; i++){
-      props.elements.sort((a: any, b: any) =>{
+      updateObject.sort((a: any, b: any) =>{
           a = a.received.split("/");
           b = b.received.split("/");
           return a[i]>b[i] ? -1 : a[i]<b[i] ? 1 : 0;
@@ -70,7 +83,7 @@ interface Column {
       return { received: value.received, pick: value.pick, deliver: value.deliver, vehicle: value.vehicle, id: id };
     }
 
-  const rows = props.elements.reverse().map(item => createData(item))
+  const rows = updateObject.reverse().map(item => createData(item))
 
   const [page, setPage] = React.useState(0);
   const [rowsPerPage, setRowsPerPage] = React.useState(10);
@@ -87,6 +100,9 @@ interface Column {
   return (
     <Paper sx={{ width: '100%', overflow: 'hidden' }}>
       <TableContainer sx={{ maxHeight: 440 }}>
+        <CheckCircleOutlineIcon onClick={()=>setWorkFunction(true)}/>
+        <DoDisturbIcon onClick={()=>setWorkFunction(false)}/>
+        <RefreshIcon onClick={()=> setUpdateObject([...props.elements])}/>
         <Table stickyHeader aria-label="sticky table">
           <TableHead>
             <TableRow>

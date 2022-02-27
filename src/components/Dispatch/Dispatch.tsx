@@ -13,7 +13,7 @@ import { MapDispatchToPropsType, MapStateToPropsType } from './DispathContainer'
 import RefreshIcon from '@mui/icons-material/Refresh';
 import DoDisturbIcon from '@mui/icons-material/DoDisturb';
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
-import styles from './Dispatch.module.scss'
+import styles from './Dispatch.module.scss';
 
 type PropsType = MapStateToPropsType & MapDispatchToPropsType
 
@@ -59,18 +59,14 @@ const vehicles =[
 
     useEffect(() => {
       let timerOne = setInterval(() => {
-        let date = new  Date()
-        let dateYear = date.getUTCFullYear()
-        let dateMonth = date.getUTCMonth()
-        let dateDay = date.getUTCDay()
+        let date = new  Date().toLocaleDateString()
         let pickRandomIndex = Math.floor(Math.random() * cities.length);
         let pick = cities[pickRandomIndex]
         let deliverRandomIndex = Math.floor(Math.random() * cities.length);
         let deliver = cities[deliverRandomIndex]
         let carRandomIndex = Math.floor(Math.random() * vehicles.length);
         let vehicle = vehicles[carRandomIndex]
-        let fullDate = `${dateYear}-${dateMonth}-${dateDay}`
-        props.addObject(fullDate, pick, deliver, vehicle)
+        props.addObject(date, pick, deliver, vehicle)
       }, 2000);
     }, [props.elements]);
     useEffect(()=>{
@@ -87,12 +83,13 @@ const vehicles =[
 
     for(let i=0;i<=2; i++){
       updateObject.sort((a:any, b:any) =>{
-          a = a.received.split("/");
-          b = b.received.split("/");
+          a = a.received.split(".");
+          b = b.received.split(".");
           return a[i]>b[i] ? -1 : a[i]<b[i] ? 1 : 0;
       }); 
   }
 
+    
     const columns: readonly Column[] = [
       { id: 'received', label: 'Дата получения', minWidth: 170 },
       { id: 'pick', label: 'Забрать из', minWidth: 100 },

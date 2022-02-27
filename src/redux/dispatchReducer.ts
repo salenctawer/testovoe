@@ -5,15 +5,15 @@ const TOGGLE_REFRESH = 'TOGGLE_REFRESH'
 
 let initialState = {
     elements:[
-        {received: '2011-6-30', pick: 'Moscow', deliver:'Perm', vehicle:'autobus'},
-        {received: '2014-7-4', pick: 'Saint-P', deliver:'Perm', vehicle:'car'},
-        {received: '2017-6-27', pick: 'Samara', deliver:'Sochi', vehicle:'airplane'},
-        {received: '2014-7-4', pick: 'Dubna', deliver:'Moscow', vehicle:'autobus'},
-        {received: '2018-6-30', pick: 'Moscow', deliver:'Perm', vehicle:'autobus'},
-        {received: '2005-6-27', pick: 'Saint-P', deliver:'Perm', vehicle:'car'},
-        {received: '2019-6-27', pick: 'Saint-P', deliver:'Perm', vehicle:'car'},
-        {received: '2000-6-27', pick: 'Saint-P', deliver:'Perm', vehicle:'car'},
-        {received: '2000-6-29', pick: 'Saint-P', deliver:'Perm', vehicle:'car'},
+        {received: '30.06.2011', pick: 'Moscow', deliver:'Perm', vehicle:'autobus'},
+        {received: '04.07.2014', pick: 'Saint-P', deliver:'Perm', vehicle:'car'},
+        {received: '27.06.2017', pick: 'Samara', deliver:'Sochi', vehicle:'airplane'},
+        {received: '24.08.2000', pick: 'Dubna', deliver:'Moscow', vehicle:'autobus'},
+        {received: '15.03.2002', pick: 'Moscow', deliver:'Perm', vehicle:'autobus'},
+        {received: '27.06.2011', pick: 'Saint-P', deliver:'Perm', vehicle:'car'},
+        {received: '27.05.2011', pick: 'Saint-P', deliver:'Perm', vehicle:'car'},
+        {received: '26.05.2011', pick: 'Saint-P', deliver:'Perm', vehicle:'car'},
+        {received: '29.06.2001', pick: 'Saint-P', deliver:'Perm', vehicle:'car'},
     ] as Array<ElementsType>
 }
 

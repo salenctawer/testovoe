@@ -86,7 +86,7 @@ const vehicles =[
     }, [props.elements, workFunction])
 
     for(let i=0;i<=2; i++){
-      updateObject.sort((a: any, b: any) =>{
+      updateObject.sort((a:any, b:any) =>{
           a = a.received.split("/");
           b = b.received.split("/");
           return a[i]>b[i] ? -1 : a[i]<b[i] ? 1 : 0;
@@ -101,21 +101,20 @@ const vehicles =[
         label: 'Доставить в',
         minWidth: 170,
         align: 'right',
-        format: (value: number) => value.toLocaleString('en-US'),
       },
       {
         id: 'vehicle',
         label: 'Транспортное средство',
         minWidth: 170,
         align: 'right',
-        format: (value: number) => value.toLocaleString('en-US'),
       }
     ];
     
+    let id = 0
+
     function createData(value: ElementsType) {
-      let id = 0
-      id = id +1
-      return { received: value.received, pick: value.pick, deliver: value.deliver, vehicle: value.vehicle, id: id };
+      id = id + 1
+      return { received: value.received, pick: value.pick, deliver: value.deliver, vehicle: value.vehicle, idElement: id};
     }
 
   const rows = updateObject.reverse().map(item => createData(item))
@@ -134,7 +133,7 @@ const vehicles =[
 
   return (
     <div className={styles.dispatch}>
-    <Paper sx={{ width: '1200px', overflow: 'hidden', paddingLeft:'80px', paddingRight:'80px' }}>
+    <Paper sx={{ width: '1200px', overflow: 'hidden', paddingLeft:'85px', paddingRight:'80px' }}>
       <div className={styles.icons}>
           <div>
           <CheckCircleOutlineIcon sx={{cursor:'pointer'}} onClick={()=>setWorkFunction(true)}/>
@@ -162,14 +161,12 @@ const vehicles =[
               .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
               .map((row) => {
                 return (
-                  <TableRow hover role="checkbox" tabIndex={-1}>
+                  <TableRow hover role="checkbox" tabIndex={-1} key={row.idElement}>
                     {columns.map((column) => {
                       const value = row[column.id];
                       return (
                         <TableCell key={column.id} align={column.align}>
-                          {column.format && typeof value === 'number'
-                            ? column.format(value)
-                            : value}
+                          { value}
                         </TableCell>
                       );
                     })}

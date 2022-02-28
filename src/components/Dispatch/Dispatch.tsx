@@ -67,7 +67,8 @@ const vehicles =[
         let carRandomIndex = Math.floor(Math.random() * vehicles.length);
         let vehicle = vehicles[carRandomIndex]
         props.addObject(date, pick, deliver, vehicle)
-      }, 2000);
+      }, 2000)
+      return () => clearInterval(timerOne)
     }, [props.elements]);
     useEffect(()=>{
       let interval = setInterval(()=>{
@@ -82,10 +83,10 @@ const vehicles =[
     }, [props.elements, workFunction])
 
     for(let i=0;i<=2; i++){
-      updateObject.sort((a:any, b:any) =>{
-          a = a.received.split(".");
-          b = b.received.split(".");
-          return a[i]>b[i] ? -1 : a[i]<b[i] ? 1 : 0;
+      updateObject.sort((a:ElementsType, b:ElementsType) =>{
+          let z = a.received.split(".");
+          let x = b.received.split(".");
+          return z[i]>x[i] ? -1 : z[i]<x[i] ? 1 : 0;
       }); 
   }
 
